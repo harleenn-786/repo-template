@@ -1,0 +1,8 @@
+version: "3"
+services:
+  backend:
+    container_name: test55-node-backend
+    build: .
+    ports:
+      - 1174:8000
+    restart: always

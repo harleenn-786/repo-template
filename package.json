@@ -1,0 +1,10 @@
+{
+  "name": "@witsinnovationlab/generator-wits-project",
+  "version": "1.0.0",
+  "description": "Yeoman generator for Node.js TypeScript projects",
+  "main": "generators/app/index.js",
+  "keywords": ["yeoman-generator"],
+  "dependencies": {
+    "yeoman-generator": "^5.9.0"
+  }
+}
