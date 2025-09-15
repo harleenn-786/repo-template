@@ -87,11 +87,11 @@ jobs:
             https://api.github.com/orgs/$ORG)
 
           if [ "$ORG_CHECK" -ne 200 ]; then
-            echo "❌ Org '$ORG' not found or no access."
+            echo " Org '$ORG' not found or no access."
             exit 1
           fi
 
-          echo "✅ Org exists."
+          echo " Org exists."
 
           echo "Checking repo..."
           REPO_CHECK=$(curl -s -o /dev/null -w "%{http_code}" \
@@ -100,7 +100,7 @@ jobs:
             https://api.github.com/repos/$ORG/$REPO)
 
           if [ "$REPO_CHECK" -eq 200 ]; then
-            echo "❌ Repo '$REPO' already exists."
+            echo " Repo '$REPO' already exists."
             exit 1
           fi
 
@@ -113,9 +113,9 @@ jobs:
             -d "{\"name\":\"$REPO\",\"private\":false,\"description\":\"$DESC\"}")
 
           if [ "$CREATE_RESP" -eq 201 ]; then
-            echo "🎉 Repo created: $ORG/$REPO"
+            echo " Repo created: $ORG/$REPO"
           else
-            echo "❌ Failed with status $CREATE_RESP"
+            echo " Failed with status $CREATE_RESP"
             exit 1
           fi
 
@@ -132,11 +132,11 @@ jobs:
             https://api.github.com/repos/$ORG/$REPO/topics \
             -d "{\"names\": $TOPICS}"
 
-          echo "✅ Topics added: $TOPICS"
+          echo " Topics added: $TOPICS"
 
       - name: Clone Template Repo
         run: |
-          git clone https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/ondcdemo/test55-node-backend.git template
+          git clone https://x-access-token:${{ secrets.pat_token }}@github.com/harleenn-786/test55-node-backend.git template
           mkdir -p ${{ github.event.inputs.repo_name }}
           cp -r template/* ${{ github.event.inputs.repo_name }}/
           cp -r template/.[!.]* ${{ github.event.inputs.repo_name }}/ || true
@@ -155,7 +155,7 @@ jobs:
       - name: Push to New Repo
         run: |
           cd ${{ github.event.inputs.repo_name }}
-          rm -rf .git  # 🚀 remove template's git history
+          rm -rf .git  #  remove template's git history
           git init
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
